@@ -34,6 +34,9 @@ def dropdown_handler(driver, xpath: str):
 
 
 def login(driver, userName, password, retry=0):
+    import selenium
+    print(selenium.__file__)
+    print(selenium.__version__)
     if retry == 3:
         raise Exception('门户登录失败')
 
@@ -49,11 +52,11 @@ def login(driver, userName, password, retry=0):
         f'{iaaaUrl}?appID={appID}&appName={appName}&redirectUrl={redirectUrl}')
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.ID, 'logon_button')))
-    driver.find_element_by_id('user_name').send_keys(userName)
+    driver.find_element('user_name').send_keys(userName)
     time.sleep(0.1)
-    driver.find_element_by_id('password').send_keys(password)
+    driver.find_element('password').send_keys(password)
     time.sleep(0.1)
-    driver.find_element_by_id('logon_button').click()
+    driver.find_element('logon_button').click()
     try:
         WebDriverWait(driver,
                       10).until(EC.visibility_of_element_located((By.ID, 'all')))
